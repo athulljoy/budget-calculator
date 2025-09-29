@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+
+        <!-- js charts -->
+         <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container bg-white p-4 mb-0">
+    
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4 id="welcomeuser" class="text-primary">
+        <i class="fa-solid fa-user me-2"></i>Welcome User
+      </h4>
+      <button onclick="logout()" class="btn btn-outline-danger fw-semibold">
+        Logout <i class="fa-solid fa-power-off ms-1"></i>
+      </button>
+    </div>
+
+    <!-- Title -->
+    <h1 class="text-center fw-bold text-primary">
+      Smart Wallet
+    </h1>
+    <hr class="w-50 mx-auto border border-2 border-primary">
+
+    <!-- Balance & Expense -->
+    <div class="row text-center mb-4">
+      <div class="col-md-6 mb-3">
+        <div class="card bg-success-subtle border-0 shadow-sm">
+          <div class="card-body">
+            <h4 class="fw-bold">Total Balance</h4>
+            <h3 id="incomedisplay" class="fw-bold text-dark">0 Rs</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="card bg-danger-subtle border-0 shadow-sm">
+          <div class="card-body">
+            <h4 class="fw-bold">Total Expense</h4>
+            <h3 id="expensedisplay" class="fw-bold text-dark">0 Rs</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Forms -->
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <div class="card border border-2">
+          <div class="card-body">
+            <h4 class="text-primary">Add Income</h4>
+            <hr>
+            <form id="incomeform">
+              <input id="incometype" type="text" class="form-control mb-2" placeholder="Enter Income Type">
+              <input id="incomeamt" type="number" class="form-control mb-2" placeholder="Enter Amount">
+              <button onclick="addIncome(event)" class="btn btn-success w-100">Add Income</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <div class="card border border-2">
+          <div class="card-body">
+            <h4 class="text-primary">Add Expense</h4>
+            <hr>
+            <form id="expenseform">
+              <input id="expensetype" type="text" class="form-control mb-2" placeholder="Enter Expense Type">
+              <input id="expenseamt" type="number" class="form-control mb-2" placeholder="Enter Amount">
+              <button onclick="addExpense(event)" class="btn btn-danger w-100">Add Expense</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Clear All -->
+    <div class="text-center mt-3">
+      <button onclick="clearAll()" class="btn btn-primary fw-semibold">
+        Clear All <i class="fa-solid fa-eraser ms-1"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Details -->
+  <section id="alldetails">
+    <div class="container bg-white p-4 mt-0">
+      <h2 class="text-center text-dark fw-bold">Income and Expense Details</h2>
+      <hr class="w-50 mx-auto border border-primary border-2">
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <h4 class="text-primary">Income</h4>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle text-center">
+              <thead class="table-success">
+                <tr>
+                  <th>Type</th>
+                  <th>Amount</th>
+                  <th>Balance</th>
+                  <th>Date & Time</th>
+                </tr>
+              </thead>
+              <tbody id="incomedetails"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <h4 class="text-primary">Expense</h4>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle text-center">
+              <thead class="table-danger">
+                <tr>
+                  <th>Type</th>
+                  <th>Amount</th>
+                  <th>Balance</th>
+                  <th>Date & Time</th>
+                </tr>
+              </thead>
+              <tbody id="expensedetails"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</body>
+
+<script src="./script.js"></script>
+</html>
