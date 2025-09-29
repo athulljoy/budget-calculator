@@ -175,7 +175,7 @@ function addIncome(event){
     let incometype=document.getElementById("incometype").value
     let incomeamt=document.getElementById("incomeamt").value
     if(incometype ==''||incomeamt==''){
-        alert("Enter All Fields")
+        alert("Enter all fields")
     }
     else{
         let newobj=JSON.parse(localStorage.getItem(loggedkey))
@@ -187,7 +187,7 @@ function addIncome(event){
         console.log(date);   
         console.log(newobj);            
         localStorage.setItem(newobj.uname,JSON.stringify(newobj))
-        alert("Amount Added Successfully")
+        alert("Income added successfully")
         displayincomeexpense();
         addincomeArray(incometype,incomeamt,newobj.income,date);
          displayincomeArray()
@@ -203,7 +203,7 @@ function addExpense(event){
     let expensetype=document.getElementById("expensetype").value
     let expenseamt=document.getElementById("expenseamt").value
     if(expensetype==''|| expenseamt==''){
-        alert("Enter All Fields")
+        alert("Enter all fields")
     }
     else{
         let newobj=JSON.parse(localStorage.getItem(loggedkey))
@@ -218,7 +218,7 @@ function addExpense(event){
             let now = new Date(); // Get the current date and time
             let date = `${now.toLocaleDateString()} ${now.getHours()}:${now.getMinutes()} :${now.getSeconds()}`; // Format date and time
     
-            alert("expense added successfully")
+            alert("Expense added successfully")
             document.getElementById("expenseform").reset();
             displayincomeexpense();
             
@@ -259,64 +259,3 @@ function clearAll(){
 
 
 }
-
-// --------------piechart----------------
-
-function displaychart() {
-    let newobj1 = JSON.parse(localStorage.getItem(loggedkey));
-    const expenseArray = newobj1.expenseArray;
-    
-    let type = expenseArray.map(x => x.type);
-    let values = expenseArray.map(x => x.amt);
-    
-    // Calculate total expense
-    const totalExpense = expenseArray.reduce((total, expense) => total + parseFloat(expense.amt), 0);
-    
-    // Calculate remaining balance
-    const remainingBalance = newobj1.income - totalExpense;
-    
-    // Add the remaining balance value and label to the existing data
-    type.push("Remaining Balance");
-    values.push(remainingBalance);
-    
-    // Generate distinct colors based on the number of types (including remaining balance)
-    const customColors = generateDistinctColors(type.length);
-    
-    const mychart = document.getElementById("piechart").getContext('2d');
-    const chart = new Chart(mychart, {
-        type: "pie",
-        data: {
-            labels: type,
-            datasets: [{
-                data: values,
-                backgroundColor: customColors,
-            }],
-        },
-        options: {
-            title: {
-                display: true
-            },
-        },
-    });
-    chart.update();
-}
-
-// generate colors for piecahrt
-
-// Function to generate an array of distinct colors using HSL
-function generateDistinctColors(num) {
-    const colors = [];
-    const increment = 360 / num;
-    let hue = 0;
-
-    for (let i = 0; i < num; i++) {
-        const saturation = 70 + Math.random() * 10;
-        const lightness = 50 + Math.random() * 10;
-        const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-        colors.push(color);
-        hue += increment;
-    }
-
-    return colors;
-}
-
